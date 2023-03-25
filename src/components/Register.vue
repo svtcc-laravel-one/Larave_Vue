@@ -11,13 +11,13 @@
         label-position="top"
     >
       <el-form-item label="用户名/邮箱:">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.username"/>
       </el-form-item>
       <el-form-item label="密码:">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.password"/>
       </el-form-item>
       <el-form-item label="确认密码:">
-        <el-input v-model="form.name"/>
+        <el-input v-model="form.passWord"/>
       </el-form-item>
       <div class="login-foot">
         <el-button type="primary" @click="onSubmit" size="large" class="login">注册</el-button>
@@ -29,19 +29,21 @@
 
 <script setup>
 import {reactive} from 'vue'
+import axios from "@/api/axios";
 
-
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-})
 defineProps(['carousel'])
+const form = reactive({
+  username: '',
+  password: '',
+  passWord: ''
+})
+function onSubmit() {
+  axios.post('/register', {username: form.username, password: form.password}).then(res => {
+    alert("注册成功")
+  })
+
+
+}
 </script>
 
 <style scoped>
